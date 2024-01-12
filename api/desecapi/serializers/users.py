@@ -90,6 +90,7 @@ class RegisterAccountSerializer(UserSerializer):
         if (
             not settings.REGISTER_LPS
             and attrs.get("captcha") is not None
+            and attrs.get("domain") is not None
             and DomainSerializer.Meta.model(name=attrs["domain"]).is_locally_registrable
         ):
             raise serializers.ValidationError(
